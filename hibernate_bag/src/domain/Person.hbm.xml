@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-3-18 10:57:49 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="domain.Person" table="person">
+        <id name="id" type="int">
+            <column name="person_id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="name" />
+        </property>
+        <property name="age" type="int">
+            <column name="age" />
+        </property>
+        <!-- 映射Bag集合的属性，集合属性值存于school表 -->
+        <bag name="schools" table="school_info" inverse="false" lazy="true">
+        <!-- 映射集合属性表的外键列，关联person表主键 -->
+            <key>
+                <column name="person_id" />
+            </key>
+            <!-- 映射保存集合元素的数据列 -->
+            <element type="java.lang.String">
+                <column name="school_name" />
+            </element>
+        </bag>
+    </class>
+</hibernate-mapping>
